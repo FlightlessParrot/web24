@@ -13,16 +13,15 @@ class RegistrationTest extends TestCase
     {
         $response = $this->postJson('api/register', [
             'name' => 'Test User',
-            'last_name' => 'Doe',
-            'phone' => '+481234567890',
+            'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
         $this->assertDatabaseHas('users', [
             'name' => 'Test User',
-            'last_name' => 'Doe',
-            'phone' => '+481234567890',
+            'email' => 'test@example.com',
         ]);
+        $response->assertCreated();
         $response->assertJsonStructure(['token', 'user']);
         $this->assertNotEmpty($response->json('token'));
     }
