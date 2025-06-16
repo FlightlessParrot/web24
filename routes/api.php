@@ -27,4 +27,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
             'update' => 'api.companies.update',
             'destroy' => 'api.companies.destroy',
         ]);
+
+    Route::resource('employees', \App\Http\Controllers\EmployeeController::class)
+        ->only(['index', 'show', 'store', 'update', 'destroy'])
+        ->names([
+            'index' => 'api.employees.index',
+            'show' => 'api.employees.show',
+            'store' => 'api.employees.store',
+            'update' => 'api.employees.update',
+            'destroy' => 'api.employees.destroy',
+        ]);
 });
